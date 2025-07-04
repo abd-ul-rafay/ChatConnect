@@ -21,7 +21,10 @@ const HomePage = () => {
   }, [])
 
   const socketIoSetup = () => {
-    const newSocket = io(BASE_URL);
+    const newSocket = io(BASE_URL, {
+      transports: ['websocket'],
+    });
+
     setSocket(newSocket);
 
     newSocket.emit('join', chatData.chat._id);
