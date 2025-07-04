@@ -12,8 +12,8 @@ const MessageBar = ({ sender, content, createdAt }) => {
                     : 'bg-gray-300 rounded-tl-none rounded-bl-xl rounded-r-md'} 
                 max-w-[60%] px-3 py-1 transition-all hover:px-3`
             }>
-                <p className="text-sm">{content}</p>
-                <p className="text-[0.7rem]">{new Date(createdAt).toLocaleString('en-GB')}</p>
+                <p className={`text-sm ${ownMessage && 'text-white'}`}>{content}</p>
+                <p className={`text-[0.7rem] ${ownMessage && 'text-white'}`}>{new Date(createdAt).toLocaleString('en-GB')}</p>
             </div>
         </div>
     );
