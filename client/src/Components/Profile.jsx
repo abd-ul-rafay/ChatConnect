@@ -2,7 +2,7 @@ import Avatar from "./Avatar"
 
 const Profile = ({ name, onClick, isSelected = false, subtitle = null }) => {
     return (
-        <div className={`flex gap-4 items-center p-2 my-1.5 rounded hover:cursor-pointer bg-gray-200 hover:bg-gray-300 ${isSelected && 'border-[1px] border-gray-300'}`} onClick={onClick}>
+        <div className={`flex gap-4 items-center p-2 my-1.5 rounded hover:cursor-pointer bg-slate-100 hover:bg-slate-200 transition-colors duration-300 ${isSelected && 'border-[1px] border-gray-300'}`} onClick={onClick}>
             <Avatar name={name} />
             <div className="max-w-[60%]">
                 <p className="text-sm truncate">{name}</p>

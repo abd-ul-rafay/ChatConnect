@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import axiosInstance from '../api';
+import { toast } from 'react-toastify';
 
 const GlobalContext = createContext();
 // eslint-disable-next-line react-refresh/only-export-components
@@ -34,7 +35,7 @@ const AppProvider = ({ children }) => {
 
             return response.data;
         } catch (err) {
-            alert(err?.response?.data?.err || 'Something went wrong');
+            toast.error(err?.response?.data?.err || 'Something went wrong');
         }
     }
 
@@ -47,7 +48,7 @@ const AppProvider = ({ children }) => {
 
             setMyChats(response.data); 
         } catch (err) {
-            alert(err?.response?.data?.err || 'Something went wrong');
+            toast.error(err?.response?.data?.err || 'Something went wrong');
         }
 
         setMyChatsLoading(false);

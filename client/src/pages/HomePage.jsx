@@ -5,6 +5,9 @@ import MessageBar from "../components/MessageBar";
 import ClipLoader from "react-spinners/ClipLoader";
 import axiosInstance, { BASE_URL } from "../api";
 import io from 'socket.io-client';
+import { toast } from 'react-toastify';
+import { IoMdSend } from "react-icons/io";
+import { RxCross2 } from "react-icons/rx";
 
 const HomePage = () => {
   const { user, token, myChats, setMyChats, getMyChats, myChatsLoading, getChat, setIsModelActive } = useGlobalContext();
@@ -69,7 +72,7 @@ const HomePage = () => {
     if (!chatData) {
       return;
     }
- 
+
     setMyChats(prev => {
       const curr = prev.find(p => p._id === chatData.chat._id);
 
@@ -117,7 +120,7 @@ const HomePage = () => {
       });
 
     } catch (err) {
-      alert(err?.response?.data?.err || 'Something went wrong');
+      toast.error(err?.response?.data?.err || 'Something went wrong');
     }
   }
 
@@ -156,9 +159,9 @@ const HomePage = () => {
   }
 
   return (
-    <section className="p-4 flex gap-4 h-[90vh]">
+    <section className="px-4 md:px-8 lg:px-12 py-6 flex gap-4 h-[90vh]">
       {/* Left portion */}
-      <div className={`w-full md:w-1/3 ${selectedUser && 'hidden md:block'} bg-gray-100 shadow-md rounded px-3 py-2 overflow-y-auto`} >
+      <div className={`w-full md:w-1/3 ${selectedUser && 'hidden md:block'} bg-white shadow-md rounded px-3 py-2 overflow-y-auto`} >
         <p className="font-semibold tracking-wide">Your Chats</p>
         {myChatsLoading && <div className="flex justify-center my-10">
           <ClipLoader
@@ -181,25 +184,23 @@ const HomePage = () => {
       </div>
 
       {/* Right portion */}
-      <div className={`w-full md:w-2/3 ${!selectedUser && 'hidden md:block'} bg-gray-100 shadow-md rounded py-2 flex flex-col`}>
+      <div className={`w-full md:w-2/3 ${!selectedUser && 'hidden md:block'} bg-white shadow-md rounded py-2 flex flex-col`}>
         {selectedUser
           ? <>
             <div className="px-2 py-1 flex items-center justify-between">
               <p className="font-semibold tracking-wide">Your chats with {selectedUser.name}</p>
-              <svg className="w-5 h-5 hover:cursor-pointer hover:text-blue-500" onClick={handleCancelChatIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z" clipRule="evenodd" />
-              </svg>
+              <RxCross2 className="w-5 h-5 hover:cursor-pointer hover:text-blue-500 transition-colors duration-200" onClick={handleCancelChatIcon} />
             </div>
             <hr className="mx-2" />
             {chatData
-              ? <div className="p-2 flex-grow overflow-y-auto" ref={chatContainerRef}>
-                {
-                  chatData?.messages?.length > 0
-                    ? chatData?.messages?.map(message => <MessageBar key={message._id} {...message} />)
-                    : <p className="text-sm text-center my-5">Send {selectedUser.name} a message to start a conversation.</p>
-                }
-              </div>
-              : <div className="flex-grow flex justify-center items-center">
+              ? chatData?.messages?.length > 0
+                ? <div className="p-2 flex-grow overflow-y-auto" ref={chatContainerRef}>
+                  {chatData?.messages?.map(message => <MessageBar key={message._id} {...message} />)}
+                </div>
+                : <div className="p-2 flex flex-grow items-center justify-center" ref={chatContainerRef}>
+                  <p className="text-sm text-center">Send {selectedUser.name} a message to start a conversation.</p>
+                </div>
+              : <div className="flex flex-grow justify-center items-center">
                 <ClipLoader
                   loading={true}
                   size={30}
@@ -216,14 +217,20 @@ const HomePage = () => {
                 value={messageInput}
                 onChange={(e) => setMessageInput(e.target.value)}
               />
-              <button type="submit" className="">
-                <svg className="w-6 h-6 hover:text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <button type="submit">
+                {/* <svg className="w-6 h-6 hover:text-blue-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
-                </svg>
+                </svg> */}
+                <IoMdSend className="w-6 h-6 hover:text-blue-500 transition-colors duration-200" />
               </button>
             </form>
           </>
-          : <div className="h-full flex items-center justify-center"><p className="text-sm">Your chats with others will shown here</p></div>
+          : <div className="h-full flex flex-col items-center justify-center">
+            <p className="text-3xl font-bold tracking-wide">
+              Chat<span className="text-blue-500">Connect</span>
+            </p>
+            <p className="text-sm">Connect with people all around the globe in realtime...</p>
+          </div>
         }
 
       </div>
