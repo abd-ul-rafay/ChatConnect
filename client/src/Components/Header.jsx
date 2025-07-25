@@ -15,7 +15,7 @@ const Header = () => {
             {user && <div className='flex items-center gap-2'>
                 <IoSearch className="w-5 h-5 hover:cursor-pointer hover:text-blue-500 transition-colors duration-200 mr-2" onClick={() => setIsModelActive(true)} />
                 <LuLogOut className="w-5 h-5 hover:cursor-pointer hover:text-blue-500 transition-colors duration-200 mr-2" onClick={logout} />
-                <Avatar name={user.name} />
+                <Avatar name={user.name} email={user.email} />
             </div>}
         </header>
     )

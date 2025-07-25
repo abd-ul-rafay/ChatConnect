@@ -80,9 +80,10 @@ const LoginPage = () => {
         <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-10 rounded">
           <FadeLoader
             color="#3b82f6"
-            loading={true}
-            aria-label="Loading Spinner"
-            data-testid="loader"
+            height={15}
+            margin={0}
+            radius={5}
+            width={5}
           />
         </div>
       )}

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from "../context";
 import UserCard from "../components/UserCard";
 import MessageBar from "../components/MessageBar";
-import ClipLoader from "react-spinners/ClipLoader";
+import SyncLoader from "react-spinners/SyncLoader";
 import axiosInstance, { BASE_URL } from "../api";
 import io from 'socket.io-client';
 import { toast } from 'react-toastify';
@@ -164,11 +164,10 @@ const HomePage = () => {
       <div className={`w-full md:w-1/3 ${selectedUser && 'hidden md:block'} bg-white shadow-md rounded px-3 py-2 overflow-y-auto`} >
         <p className="font-semibold tracking-wide">Your Chats</p>
         {myChatsLoading && <div className="flex justify-center my-10">
-          <ClipLoader
-            loading={true}
-            size={20}
-            aria-label="Loading Spinner"
-            data-testid="loader"
+          <SyncLoader
+            color="#3b82f6"
+            size={10}
+            speedMultiplier={0.75}
           />
         </div>}
         {myChats.length < 1 && !myChatsLoading && <p className="text-center text-sm mt-20">
@@ -201,11 +200,10 @@ const HomePage = () => {
                   <p className="text-sm text-center">Send {selectedUser.name} a message to start a conversation.</p>
                 </div>
               : <div className="flex flex-grow justify-center items-center">
-                <ClipLoader
-                  loading={true}
-                  size={30}
-                  aria-label="Loading Spinner"
-                  data-testid="loader"
+                <SyncLoader
+                  color="#3b82f6"
+                  size={10}
+                  speedMultiplier={0.75}
                 />
               </div>}
             <form className="px-2 pt-2 mx-2 flex gap-2" onSubmit={handleOnMessageSend}>
