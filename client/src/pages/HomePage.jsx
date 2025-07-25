@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import Profile from "../Components/Profile";
 import { useGlobalContext } from "../context";
+import Profile from "../components/Profile";
+import MessageBar from "../components/MessageBar";
 import ClipLoader from "react-spinners/ClipLoader";
-import MessageBar from "../Components/MessageBar";
 import axiosInstance, { BASE_URL } from "../api";
 import io from 'socket.io-client';
 
@@ -112,7 +112,7 @@ const HomePage = () => {
         content
       };
 
-      await axiosInstance.post('api/v1/chat/send-message', JSON.stringify(body), {
+      await axiosInstance.post('api/v1/chats/message', JSON.stringify(body), {
         headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
       });
 

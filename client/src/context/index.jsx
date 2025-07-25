@@ -24,7 +24,7 @@ const AppProvider = ({ children }) => {
 
     const getChat = async (id, isFromSearch = false) => {
         try {
-            const response = await axiosInstance.get(`/api/v1/chat/get-chat/${id}`, {
+            const response = await axiosInstance.get(`/api/v1/chats/with/${id}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
  
@@ -41,7 +41,7 @@ const AppProvider = ({ children }) => {
     const getMyChats = async () => {
         try {
             setMyChatsLoading(true);
-            const response = await axiosInstance.get('/api/v1/chat/get-my-chats', {
+            const response = await axiosInstance.get('/api/v1/chats', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 

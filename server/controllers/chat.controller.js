@@ -19,7 +19,7 @@ export const getMyChats = async (req, res) => {
 
 export const getChat = async (req, res) => {
     const { userId } = req.user;
-    const { otherUserId } = req.params;
+    const otherUserId = req.params.userId;
 
     let isNewChat = false;
 

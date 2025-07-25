@@ -24,7 +24,7 @@ const SearchModal = () => {
 
     const searchUsers = async (text) => {
         try {
-            const response = await axiosInstance.get(`/api/v1/user/search?name=${text}`, {
+            const response = await axiosInstance.get(`/api/v1/users/?name=${text}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 

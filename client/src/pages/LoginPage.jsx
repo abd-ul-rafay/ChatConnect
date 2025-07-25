@@ -11,7 +11,7 @@ const LoginPage = () => {
   const loginUser = async () => {
     setLoading(true);
     try {
-      const response = await axiosInstance.post('api/v1/user/login', JSON.stringify(form), {
+      const response = await axiosInstance.post('api/v1/auth/login', JSON.stringify(form), {
         headers: { 'Content-Type': 'application/json' }
       });
       setUser(response.data.user);
@@ -33,7 +33,7 @@ const LoginPage = () => {
 
     setLoading(true);
     try {
-      const response = await axiosInstance.post('api/v1/user/register', JSON.stringify(form), {
+      const response = await axiosInstance.post('api/v1/auth/register', JSON.stringify(form), {
         headers: { 'Content-Type': 'application/json' }
       });
       setUser(response.data.user);
