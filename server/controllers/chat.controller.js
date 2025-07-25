@@ -1,5 +1,5 @@
-import Chat from '../models/chat.js';
-import Message from '../models/message.js';
+import Chat from '../models/chat.model.js';
+import Message from '../models/message.model.js';
 import CustomError from '../errors/custom-error.js';
 
 export const getMyChats = async (req, res) => {

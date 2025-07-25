@@ -3,8 +3,9 @@ import 'express-async-errors';
 import dotenv from 'dotenv';
 import connectDB from './utils/connect-db.js';
 import authorization from './middlewares/authorization.js';
-import userRouter from './routers/user.js';
-import chatRouter from './routers/chat.js';
+import authRoutes from './routes/auth.route.js';
+import userRoutes from './routes/user.route.js';
+import chatRoutes from './routes/chat.route.js';
 import notFound from './middlewares/not-found.js';
 import errorHandler from './middlewares/error-handler.js';
 import socketIO from './socket_io/index.js';
@@ -28,8 +29,9 @@ app.get('/', (req, res) => {
     res.send('ChatConnect');
 });
 
-app.use('/api/v1/user', userRouter);
-app.use('/api/v1/chat', authorization, chatRouter);
+app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/users', authorization, userRoutes);
+app.use('/api/v1/chats', authorization, chatRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
