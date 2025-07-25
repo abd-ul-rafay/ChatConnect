@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../context";
 import axiosInstance from '../api';
-import Profile from "./Profile";
+import UserCard from "./UserCard";
 import { toast } from 'react-toastify';
 import { RxCross2 } from "react-icons/rx";
 
@@ -73,7 +73,7 @@ const SearchModal = () => {
                     onChange={(e) => setSearchText(e.target.value)}
                 />
                 <div className="h-[80vh] overflow-y-scroll">
-                    {users.map(user => (<Profile key={user._id} name={user.name} onClick={() => handleProfileClick(user._id)} />))}
+                    {users.map(user => (<UserCard key={user._id} name={user.name} onClick={() => handleProfileClick(user._id)} />))}
                 </div>
                 {users.length < 1 && searchText.length > 0 && <p className="text-center mt-10 text-sm">- - - -</p>}
             </aside>

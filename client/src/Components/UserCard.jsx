@@ -1,6 +1,6 @@
 import Avatar from "./Avatar"
 
-const Profile = ({ name, onClick, isSelected = false, subtitle = null }) => {
+const UserCard = ({ name, onClick, isSelected = false, subtitle = null }) => {
     return (
         <div className={`flex gap-4 items-center p-2 my-1.5 rounded hover:cursor-pointer bg-slate-100 hover:bg-slate-200 transition-colors duration-300 ${isSelected && 'border-[1px] border-gray-300'}`} onClick={onClick}>
             <Avatar name={name} />
@@ -12,4 +12,4 @@ const Profile = ({ name, onClick, isSelected = false, subtitle = null }) => {
     )
 }
 
-export default Profile
+export default UserCard

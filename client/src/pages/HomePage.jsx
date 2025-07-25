@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useGlobalContext } from "../context";
-import Profile from "../components/Profile";
+import UserCard from "../components/UserCard";
 import MessageBar from "../components/MessageBar";
 import ClipLoader from "react-spinners/ClipLoader";
 import axiosInstance, { BASE_URL } from "../api";
@@ -179,7 +179,7 @@ const HomePage = () => {
             return;
           }
 
-          return <Profile key={chatUser._id} name={chatUser.name} subtitle={chat?.latestMessage?.content} onClick={() => handleProfileClick(chatUser)} isSelected={(selectedUser && selectedUser._id === chatUser._id) ? true : false} />
+          return <UserCard key={chatUser._id} name={chatUser.name} subtitle={chat?.latestMessage?.content} onClick={() => handleProfileClick(chatUser)} isSelected={(selectedUser && selectedUser._id === chatUser._id) ? true : false} />
         }))}
       </div>
 

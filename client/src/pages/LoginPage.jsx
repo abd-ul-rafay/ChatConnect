@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useGlobalContext } from '../context/index';
 import axiosInstance from "../api";
 import { toast } from 'react-toastify';
+import FadeLoader from "react-spinners/FadeLoader";
 
 const LoginPage = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -77,7 +78,12 @@ const LoginPage = () => {
     <section className="w-11/12 sm:w-2/3 md:w-1/2 lg:w-2/5 mx-auto my-20 px-10 py-5 bg-white rounded shadow relative">
       {loading && (
         <div className="absolute inset-0 bg-white/70 flex items-center justify-center z-10 rounded">
-          <div className="text-blue-500 font-semibold animate-pulse">Processing...</div>
+          <FadeLoader
+            color="#3b82f6"
+            loading={true}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
         </div>
       )}
       <form onSubmit={handleFormSubmit} className={`${loading ? 'pointer-events-none opacity-50' : ''}`}>
